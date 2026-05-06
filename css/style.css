@@ -58,7 +58,7 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height
 .btn-primary:hover { background: #005a8c; transform: translateY(-2px); box-shadow: 0 10px 20px rgba(0,119,182,0.3); }
 .btn-secondary { background: #25D366; color: #fff; }
 .btn-secondary:hover { background: #1da851; transform: translateY(-2px); box-shadow: 0 10px 20px rgba(37,211,102,0.3); }
-.btn-telegram { background: #0088cc; color: #fff; }
+.btn-telegram { background: #0077b6; color: #fff; }
 .btn-telegram:hover { background: #0077b6; transform: translateY(-2px); box-shadow: 0 10px 20px rgba(0,136,204,0.3); }
 .btn-outline { border: 2px solid #0077b6; color: #0077b6; background: transparent; }
 .btn-outline:hover { background: #0077b6; color: #fff; transform: translateY(-2px); }
