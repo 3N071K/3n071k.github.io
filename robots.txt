@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://3n071k.github.io/baikal-boat-tour/sitemap.xml
