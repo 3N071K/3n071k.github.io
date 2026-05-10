@@ -167,3 +167,21 @@ cookieAccept.addEventListener('click', () => {
     localStorage.setItem('cookieAccepted', 'true');
     cookieBanner.classList.add('hidden');
 });
+
+// Анимация появления при скролле
+const animatedElements = document.querySelectorAll('[data-animate], h2');
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            // Для h2, которые не имеют data-animate, мы всё равно добавим .visible
+            observer.unobserve(entry.target);
+        }
+    });
+}, {
+    threshold: 0.1,
+    rootMargin: '0px 0px -20px 0px'
+});
+
+animatedElements.forEach(el => observer.observe(el));
