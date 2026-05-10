@@ -4,7 +4,7 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height
 .container { width: 90%; max-width: 1100px; margin: 0 auto; }
 
 /* Шапка */
-.header { background: #fff; box-shadow: 0 4px 20px rgba(0,0,0,0.08); position: sticky; top: 0; z-index: 100; }
+.header { background: rgba(255,255,255,0.85); backdrop-filter: blur(10px); box-shadow: 0 4px 20px rgba(0,0,0,0.08); position: sticky; top: 0; z-index: 100; }
 .header .container { display: flex; justify-content: space-between; align-items: center; padding: 0.8rem 0; }
 .logo { font-size: 1.7rem; font-weight: bold; color: #0077b6; text-decoration: none; white-space: nowrap; }
 .nav { display: flex; align-items: center; }
@@ -16,7 +16,7 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height
 
 /* Мобильное меню */
 @media (max-width: 768px) {
-    .nav { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; width: 100%; background: #fff; box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+    .nav { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; width: 100%; background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
     .nav.active { display: flex; }
     .nav a { margin: 0; padding: 1rem 2rem; border-bottom: 1px solid #eee; }
     .nav a.btn-header { border-radius: 0; background: transparent; color: #0077b6; text-align: center; }
@@ -39,18 +39,39 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height
     height: 100%;
     object-fit: cover;
     z-index: -1;
+    transform: scale(1.05);
+    transition: transform 0.8s ease-out;
+}
+.hero:hover .hero-bg {
+    transform: scale(1); /* лёгкий параллакс при наведении */
 }
 .hero-overlay {
-    z-index: 1;
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.45);
+    z-index: 0;
 }
 .hero .container {
     z-index: 2;
+    animation: fadeInUp 0.8s ease both;
 }
 .hero h1 { font-size: 2.8rem; margin-bottom: 0.5rem; text-shadow: 2px 2px 10px rgba(0,0,0,0.8); }
 .hero p { font-size: 1.3rem; margin-bottom: 2rem; text-shadow: 1px 1px 5px rgba(0,0,0,0.8); }
 .hero-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
-.hero-buttons .btn { font-size: 1.1rem; }
+.hero-buttons .btn { font-size: 1.1rem; animation: floatButton 2s ease-in-out infinite; }
+.hero-buttons .btn:nth-child(2) { animation-delay: 0.2s; }
+.hero-buttons .btn:nth-child(3) { animation-delay: 0.4s; }
 .hero-buttons .btn i { margin-right: 6px; }
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes floatButton {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+}
 
 /* Кнопки */
 .btn { display: inline-block; padding: 0.8rem 1.8rem; border-radius: 30px; text-decoration: none; font-weight: bold; transition: all 0.3s ease; cursor: pointer; }
@@ -63,14 +84,18 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height
 .btn-outline { border: 2px solid #0077b6; color: #0077b6; background: transparent; }
 .btn-outline:hover { background: #0077b6; color: #fff; transform: translateY(-2px); }
 .btn-sm { padding: 0.5rem 1.2rem; font-size: 0.9rem; border-radius: 20px; }
-.btn i { margin-right: 5px; }
+.btn i { margin-right: 5px; transition: transform 0.3s; }
+.btn:hover i { transform: scale(1.15); }
 
 /* Катера, маршруты, отзывы */
 section { padding: 4rem 0; }
-h2 { font-size: 2.2rem; margin-bottom: 2rem; text-align: center; position: relative; }
-h2:after { content: ''; display: block; width: 60px; height: 3px; background: #0077b6; margin: 0.5rem auto; border-radius: 2px; }
+h2 { font-size: 2.2rem; margin-bottom: 2rem; text-align: center; position: relative; opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+h2.visible { opacity: 1; transform: translateY(0); }
+h2:after { content: ''; display: block; width: 60px; height: 3px; background: #0077b6; margin: 0.5rem auto; border-radius: 2px; transform: scaleX(0); transition: transform 0.4s ease; }
+h2.visible:after { transform: scaleX(1); }
 .cards, .route-cards, .review-cards { display: flex; gap: 2rem; flex-wrap: wrap; justify-content: center; }
-.card, .route-card, .review { background: #fff; border-radius: 16px; padding: 1.5rem; width: 300px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.06); transition: transform 0.3s, box-shadow 0.3s; cursor: pointer; }
+.card, .route-card, .review { background: rgba(255,255,255,0.7); backdrop-filter: blur(8px); border-radius: 16px; padding: 1.5rem; width: 300px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.06); transition: transform 0.3s, box-shadow 0.3s; cursor: pointer; opacity: 0; transform: translateY(30px); }
+.card.visible, .route-card.visible, .review.visible { opacity: 1; transform: translateY(0); transition: opacity 0.6s ease, transform 0.6s ease; }
 .card:hover, .route-card:hover { transform: translateY(-5px); box-shadow: 0 15px 35px rgba(0,0,0,0.1); }
 .card img, .route-card img { width: 100%; height: 200px; object-fit: cover; border-radius: 12px; margin-bottom: 1rem; }
 .price { font-size: 1.4rem; font-weight: bold; color: #0077b6; margin: 1rem 0; }
@@ -107,12 +132,13 @@ h2:after { content: ''; display: block; width: 60px; height: 3px; background: #0
 
 /* О нас */
 .about-grid { display: flex; gap: 2rem; flex-wrap: wrap; justify-content: center; }
-.about-item { flex: 1 1 250px; background: #fff; padding: 2rem; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.04); text-align: center; transition: transform 0.3s; }
+.about-item { flex: 1 1 250px; background: rgba(255,255,255,0.75); backdrop-filter: blur(5px); padding: 2rem; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.04); text-align: center; transition: transform 0.3s; opacity: 0; transform: translateY(30px); }
+.about-item.visible { opacity: 1; transform: translateY(0); transition: opacity 0.6s ease, transform 0.6s ease; }
 .about-item:hover { transform: translateY(-5px); }
 .about-item h3 { color: #0077b6; margin-bottom: 0.5rem; font-size: 1.3rem; }
 
 /* Отзывы */
-.review { background: #fff; box-shadow: 0 10px 30px rgba(0,0,0,0.06); }
+.review { background: rgba(255,255,255,0.7); backdrop-filter: blur(8px); box-shadow: 0 10px 30px rgba(0,0,0,0.06); }
 .review p { font-style: italic; }
 .review cite { display: block; margin-top: 0.5rem; font-weight: bold; }
 
@@ -132,36 +158,38 @@ h2:after { content: ''; display: block; width: 60px; height: 3px; background: #0
 .footer { background: #222; color: #fff; text-align: center; padding: 1.5rem; }
 .footer a { color: #25D366; }
 
-/* Фиксированная панель звонка (мобильная) — ИСПРАВЛЕНО */
+/* Фиксированная панель звонка (мобильная) */
 .mobile-call-bar {
     display: none;
     position: fixed;
     bottom: 0;
     left: 0;
     width: 100%;
-    background: #fff;
+    background: rgba(255,255,255,0.9);
+    backdrop-filter: blur(8px);
     border-top: 2px solid #eee;
-    padding: 0.4rem 0.25rem;      /* немного уменьшил вертикальный отступ */
+    padding: 0.4rem 0.25rem;
     z-index: 200;
     justify-content: space-around;
-    gap: 0.4rem;                   /* добавлен зазор между кнопками */
+    gap: 0.4rem;
     box-shadow: 0 -5px 15px rgba(0,0,0,0.05);
 }
 .mobile-call-bar .btn {
-    padding: 0.5rem 0.5rem;       /* уменьшен паддинг внутри кнопок */
-    font-size: 0.8rem;            /* уменьшен шрифт */
+    padding: 0.5rem 0.5rem;
+    font-size: 0.8rem;
     border-radius: 20px;
-    flex: 1;                      /* кнопки равномерно растягиваются */
+    flex: 1;
     text-align: center;
-    white-space: nowrap;          /* текст не переносится */
+    white-space: nowrap;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 0.2rem;
+    animation: none; /* убираем анимацию кнопок из героя */
 }
 .mobile-call-bar .btn i {
     margin-right: 3px;
-    font-size: 0.8rem;            /* подогнал размер иконок */
+    font-size: 0.8rem;
 }
 
 @media (max-width: 768px) {
@@ -181,12 +209,17 @@ h2:after { content: ''; display: block; width: 60px; height: 3px; background: #0
 }
 .modal-overlay.active { display: flex; }
 .modal-content {
-    background: #fff;
+    background: rgba(255,255,255,0.9);
+    backdrop-filter: blur(15px);
     border-radius: 16px;
     max-width: 600px;
     width: 90%;
     position: relative;
-    animation: fadeIn 0.3s ease;
+    animation: modalIn 0.3s ease;
+}
+@keyframes modalIn {
+    from { opacity: 0; transform: scale(0.95) translateY(20px); }
+    to { opacity: 1; transform: scale(1) translateY(0); }
 }
 .modal-close {
     position: absolute;
@@ -197,7 +230,9 @@ h2:after { content: ''; display: block; width: 60px; height: 3px; background: #0
     cursor: pointer;
     background: none;
     border: none;
+    transition: transform 0.3s;
 }
+.modal-close:hover { transform: rotate(90deg); }
 .modal-img {
     width: 100%;
     border-top-left-radius: 16px;
@@ -217,10 +252,6 @@ h2:after { content: ''; display: block; width: 60px; height: 3px; background: #0
     font-size: 1.3rem;
     font-weight: bold;
     margin: 1rem 0;
-}
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(-20px); }
-    to { opacity: 1; transform: translateY(0); }
 }
 
 /* Cookie-баннер */
@@ -253,3 +284,9 @@ h2:after { content: ''; display: block; width: 60px; height: 3px; background: #0
     white-space: nowrap;
 }
 .hidden { display: none !important; }
+
+/* Дополнительные анимации для плавного появления */
+@keyframes fadeInLeft {
+    from { opacity: 0; transform: translateX(-20px); }
+    to { opacity: 1; transform: translateX(0); }
+}
