@@ -132,7 +132,7 @@ h2:after { content: ''; display: block; width: 60px; height: 3px; background: #0
 .footer { background: #222; color: #fff; text-align: center; padding: 1.5rem; }
 .footer a { color: #25D366; }
 
-/* Фиксированная панель звонка (мобильная) */
+/* Фиксированная панель звонка (мобильная) — ИСПРАВЛЕНО */
 .mobile-call-bar {
     display: none;
     position: fixed;
@@ -141,11 +141,29 @@ h2:after { content: ''; display: block; width: 60px; height: 3px; background: #0
     width: 100%;
     background: #fff;
     border-top: 2px solid #eee;
-    padding: 0.5rem;
+    padding: 0.4rem 0.25rem;      /* немного уменьшил вертикальный отступ */
     z-index: 200;
     justify-content: space-around;
+    gap: 0.4rem;                   /* добавлен зазор между кнопками */
     box-shadow: 0 -5px 15px rgba(0,0,0,0.05);
 }
+.mobile-call-bar .btn {
+    padding: 0.5rem 0.5rem;       /* уменьшен паддинг внутри кнопок */
+    font-size: 0.8rem;            /* уменьшен шрифт */
+    border-radius: 20px;
+    flex: 1;                      /* кнопки равномерно растягиваются */
+    text-align: center;
+    white-space: nowrap;          /* текст не переносится */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.2rem;
+}
+.mobile-call-bar .btn i {
+    margin-right: 3px;
+    font-size: 0.8rem;            /* подогнал размер иконок */
+}
+
 @media (max-width: 768px) {
     .mobile-call-bar { display: flex; }
 }
