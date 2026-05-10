@@ -1,292 +1,111 @@
-* { box-sizing: border-box; margin: 0; padding: 0; }
-body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; }
-
-.container { width: 90%; max-width: 1100px; margin: 0 auto; }
-
-/* Шапка */
-.header { background: rgba(255,255,255,0.85); backdrop-filter: blur(10px); box-shadow: 0 4px 20px rgba(0,0,0,0.08); position: sticky; top: 0; z-index: 100; }
-.header .container { display: flex; justify-content: space-between; align-items: center; padding: 0.8rem 0; }
-.logo { font-size: 1.7rem; font-weight: bold; color: #0077b6; text-decoration: none; white-space: nowrap; }
-.nav { display: flex; align-items: center; }
-.nav a { margin-left: 1.5rem; text-decoration: none; color: #333; font-weight: 500; transition: color 0.3s; }
-.nav a:hover { color: #0077b6; }
-.nav a.btn-header { background: #0077b6; color: #fff; padding: 0.5rem 1.2rem; border-radius: 30px; }
-.nav a.btn-header i { margin-right: 5px; }
-.mobile-menu-btn { display: none; background: none; border: none; font-size: 2rem; cursor: pointer; }
-
-/* Мобильное меню */
-@media (max-width: 768px) {
-    .nav { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; width: 100%; background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
-    .nav.active { display: flex; }
-    .nav a { margin: 0; padding: 1rem 2rem; border-bottom: 1px solid #eee; }
-    .nav a.btn-header { border-radius: 0; background: transparent; color: #0077b6; text-align: center; }
-    .mobile-menu-btn { display: block; }
-}
-
-/* Герой */
-.hero {
-    position: relative;
-    color: #fff;
-    padding: 5rem 0;
-    text-align: center;
-    overflow: hidden; 
-}
-.hero .hero-bg {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    z-index: -1;
-    transform: scale(1.05);
-    transition: transform 0.8s ease-out;
-}
-.hero:hover .hero-bg {
-    transform: scale(1); /* лёгкий параллакс при наведении */
-}
-.hero-overlay {
-    position: absolute;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0,0,0,0.45);
-    z-index: 0;
-}
-.hero .container {
-    z-index: 2;
-    animation: fadeInUp 0.8s ease both;
-}
-.hero h1 { font-size: 2.8rem; margin-bottom: 0.5rem; text-shadow: 2px 2px 10px rgba(0,0,0,0.8); }
-.hero p { font-size: 1.3rem; margin-bottom: 2rem; text-shadow: 1px 1px 5px rgba(0,0,0,0.8); }
-.hero-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
-.hero-buttons .btn { font-size: 1.1rem; animation: floatButton 2s ease-in-out infinite; }
-.hero-buttons .btn:nth-child(2) { animation-delay: 0.2s; }
-.hero-buttons .btn:nth-child(3) { animation-delay: 0.4s; }
-.hero-buttons .btn i { margin-right: 6px; }
-
-@keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(30px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes floatButton {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-6px); }
-}
-
-/* Кнопки */
-.btn { display: inline-block; padding: 0.8rem 1.8rem; border-radius: 30px; text-decoration: none; font-weight: bold; transition: all 0.3s ease; cursor: pointer; }
-.btn-primary { background: #0077b6; color: #fff; }
-.btn-primary:hover { background: #005a8c; transform: translateY(-2px); box-shadow: 0 10px 20px rgba(0,119,182,0.3); }
-.btn-secondary { background: #1da851; color: #fff; }
-.btn-secondary:hover { background: #1da851; transform: translateY(-2px); box-shadow: 0 10px 20px rgba(37,211,102,0.3); }
-.btn-telegram { background: #0077b6; color: #fff; }
-.btn-telegram:hover { background: #0077b6; transform: translateY(-2px); box-shadow: 0 10px 20px rgba(0,136,204,0.3); }
-.btn-outline { border: 2px solid #0077b6; color: #0077b6; background: transparent; }
-.btn-outline:hover { background: #0077b6; color: #fff; transform: translateY(-2px); }
-.btn-sm { padding: 0.5rem 1.2rem; font-size: 0.9rem; border-radius: 20px; }
-.btn i { margin-right: 5px; transition: transform 0.3s; }
-.btn:hover i { transform: scale(1.15); }
-
-/* Катера, маршруты, отзывы */
-section { padding: 4rem 0; }
-h2 { font-size: 2.2rem; margin-bottom: 2rem; text-align: center; position: relative; opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
-h2.visible { opacity: 1; transform: translateY(0); }
-h2:after { content: ''; display: block; width: 60px; height: 3px; background: #0077b6; margin: 0.5rem auto; border-radius: 2px; transform: scaleX(0); transition: transform 0.4s ease; }
-h2.visible:after { transform: scaleX(1); }
-.cards, .route-cards, .review-cards { display: flex; gap: 2rem; flex-wrap: wrap; justify-content: center; }
-.card, .route-card, .review { background: rgba(255,255,255,0.7); backdrop-filter: blur(8px); border-radius: 16px; padding: 1.5rem; width: 300px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.06); transition: transform 0.3s, box-shadow 0.3s; cursor: pointer; opacity: 0; transform: translateY(30px); }
-.card.visible, .route-card.visible, .review.visible { opacity: 1; transform: translateY(0); transition: opacity 0.6s ease, transform 0.6s ease; }
-.card:hover, .route-card:hover { transform: translateY(-5px); box-shadow: 0 15px 35px rgba(0,0,0,0.1); }
-.card img, .route-card img { width: 100%; height: 200px; object-fit: cover; border-radius: 12px; margin-bottom: 1rem; }
-.price { font-size: 1.4rem; font-weight: bold; color: #0077b6; margin: 1rem 0; }
-
-.link {
-    display: block;
-    width: fit-content;
-    margin: 2rem auto;
-    text-align: center;
-    color: #0077b6;
-    font-weight: 600;
-    font-size: 1.1rem;
-    text-decoration: none;
-    border: 2px solid #0077b6;
-    padding: 0.7rem 1.8rem;
-    border-radius: 30px;
-    transition: all 0.3s;
-    background: #fff;
-}
-.link:hover { background: #0077b6; color: #fff; }
-.link i { margin-left: 6px; }
-
-/* Таблица */
-.full-price { background: #f8fbfd; }
-.table-wrapper { overflow-x: auto; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
-.full-price table { width: 100%; border-collapse: collapse; border-style: hidden; border-radius: 16px; }
-.full-price th { background: #0077b6; color: #fff; padding: 1rem; text-align: left; }
-.full-price th:first-child { border-top-left-radius: 16px; }
-.full-price th:last-child { border-top-right-radius: 16px; }
-.full-price td { padding: 0.9rem; border-bottom: 1px solid #e9ecef; }
-.full-price tr:last-child td:first-child { border-bottom-left-radius: 16px; }
-.full-price tr:last-child td:last-child { border-bottom-right-radius: 16px; }
-.full-price tbody tr:hover { background: #f1f9ff; }
-
-/* О нас */
-.about-grid { display: flex; gap: 2rem; flex-wrap: wrap; justify-content: center; }
-.about-item { flex: 1 1 250px; background: rgba(255,255,255,0.75); backdrop-filter: blur(5px); padding: 2rem; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.04); text-align: center; transition: transform 0.3s; opacity: 0; transform: translateY(30px); }
-.about-item.visible { opacity: 1; transform: translateY(0); transition: opacity 0.6s ease, transform 0.6s ease; }
-.about-item:hover { transform: translateY(-5px); }
-.about-item h3 { color: #0077b6; margin-bottom: 0.5rem; font-size: 1.3rem; }
-
-/* Отзывы */
-.review { background: rgba(255,255,255,0.7); backdrop-filter: blur(8px); box-shadow: 0 10px 30px rgba(0,0,0,0.06); }
-.review p { font-style: italic; }
-.review cite { display: block; margin-top: 0.5rem; font-weight: bold; }
-
-/* Контакты */
-.contacts { background: #fff; }
-.contact-grid { display: flex; gap: 2rem; flex-wrap: wrap; align-items: flex-start; }
-.contact-info { flex: 1; background: #f8fbfd; padding: 2rem; border-radius: 16px; }
-.contact-form { flex: 1; background: #fff; padding: 2rem; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.06); }
-.contact-form input { width: 100%; padding: 0.9rem; margin-bottom: 1rem; border: 1px solid #ddd; border-radius: 10px; font-size: 1rem; }
-.contact-form button { width: 100%; }
-.note { font-size: 0.8rem; color: #666; margin-top: 0.5rem; }
-.socials a { display: inline-block; margin-right: 1rem; margin-top: 0.5rem; color: #0077b6; text-decoration: none; font-weight: 500; }
-.socials a i { margin-right: 4px; }
-.map-container { margin-top: 1.5rem; }
-
-/* Футер */
-.footer { background: #222; color: #fff; text-align: center; padding: 1.5rem; }
-.footer a { color: #25D366; }
-
-/* Фиксированная панель звонка (мобильная) */
-.mobile-call-bar {
-    display: none;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    background: rgba(255,255,255,0.9);
-    backdrop-filter: blur(8px);
-    border-top: 2px solid #eee;
-    padding: 0.4rem 0.25rem;
-    z-index: 200;
-    justify-content: space-around;
-    gap: 0.4rem;
-    box-shadow: 0 -5px 15px rgba(0,0,0,0.05);
-}
-.mobile-call-bar .btn {
-    padding: 0.5rem 0.5rem;
-    font-size: 0.8rem;
-    border-radius: 20px;
-    flex: 1;
-    text-align: center;
-    white-space: nowrap;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.2rem;
-    animation: none; /* убираем анимацию кнопок из героя */
-}
-.mobile-call-bar .btn i {
-    margin-right: 3px;
-    font-size: 0.8rem;
-}
-
-@media (max-width: 768px) {
-    .mobile-call-bar { display: flex; }
-}
-
-/* Модальное окно */
-.modal-overlay {
-    display: none;
-    position: fixed;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0,0,0,0.7);
-    z-index: 300;
-    justify-content: center;
-    align-items: center;
-    overflow-y: auto;
-}
-.modal-overlay.active { display: flex; }
-.modal-content {
-    background: rgba(255,255,255,0.9);
-    backdrop-filter: blur(15px);
-    border-radius: 16px;
-    max-width: 600px;
-    width: 90%;
-    position: relative;
-    animation: modalIn 0.3s ease;
-}
-@keyframes modalIn {
-    from { opacity: 0; transform: scale(0.95) translateY(20px); }
-    to { opacity: 1; transform: scale(1) translateY(0); }
-}
-.modal-close {
-    position: absolute;
-    top: 10px;
-    right: 15px;
-    font-size: 2rem;
-    color: #333;
-    cursor: pointer;
-    background: none;
-    border: none;
-    transition: transform 0.3s;
-}
-.modal-close:hover { transform: rotate(90deg); }
-.modal-img {
-    width: 100%;
-    border-top-left-radius: 16px;
-    border-top-right-radius: 16px;
-    max-height: 400px;
-    object-fit: cover;
-}
-.modal-body {
-    padding: 1.5rem;
-    text-align: center;
-}
-.modal-body h3 {
-    margin-bottom: 0.5rem;
-    color: #0077b6;
-}
-.modal-price {
-    font-size: 1.3rem;
-    font-weight: bold;
-    margin: 1rem 0;
-}
-
-/* Cookie-баннер */
-.cookie-banner {
-    display: none;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    background: #222;
-    color: #fff;
-    padding: 1rem 2rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    z-index: 400;
-}
-.cookie-banner p {
-    margin: 0;
-    font-size: 0.9rem;
-    max-width: 70%;
-}
-.cookie-banner a {
-    color: #25D366;
-    text-decoration: underline;
-}
-.cookie-banner .btn {
-    margin-left: 1rem;
-    white-space: nowrap;
-}
-.hidden { display: none !important; }
-
-/* Дополнительные анимации для плавного появления */
-@keyframes fadeInLeft {
-    from { opacity: 0; transform: translateX(-20px); }
-    to { opacity: 1; transform: translateX(0); }
-}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 — Страница не найдена | Байкал Прогулки</title>
+    <meta name="description" content="Кажется, вы уплыли не в ту бухту. Вернитесь на главную и выберите маршрут по душе.">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0077b6 0%, #00a8e8 100%);
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem;
+        }
+        .container {
+            max-width: 600px;
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 24px;
+            padding: 3rem 2rem;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.2);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        .icon {
+            font-size: 5rem;
+            margin-bottom: 1rem;
+            animation: float 3s ease-in-out infinite;
+        }
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        h1 {
+            font-size: 5rem;
+            font-weight: 800;
+            line-height: 1;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+        }
+        h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        p {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+        .btn {
+            display: inline-block;
+            background: #fff;
+            color: #0077b6;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        .btn:hover {
+            background: #f0f8ff;
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+        .btn i {
+            margin-right: 8px;
+        }
+        .links {
+            margin-top: 2rem;
+            font-size: 0.95rem;
+            opacity: 0.8;
+        }
+        .links a {
+            color: #fff;
+            text-decoration: underline;
+            margin: 0 0.5rem;
+        }
+        .links a:hover {
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="icon">🌊</div>
+        <h1>404</h1>
+        <h2>Вы уплыли не в ту бухту</h2>
+        <p>
+            Кажется, этой страницы не существует.<br>
+            Возможно, её смыло байкальской волной или унёс ветер с Ольхона.
+        </p>
+        <a href="/" class="btn"><i class="fas fa-home"></i> Вернуться на главную</a>
+        <div class="links">
+            Или посмотрите:
+            <a href="/#routes">маршруты</a> |
+            <a href="/#prices">цены</a> |
+            <a href="tel:+79642276716">позвонить капитану</a>
+        </div>
+    </div>
+</body>
+</html>
