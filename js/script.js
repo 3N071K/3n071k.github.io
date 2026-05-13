@@ -48,7 +48,6 @@ const modalPrice = document.getElementById('modalPrice');
 const modalOrderBtn = document.getElementById('modalOrderBtn');
 const modalClose = document.getElementById('modalClose');
 
-// Данные для модалок
 const infoData = {
     'boat-nissan': {
         title: 'Катер Nissan GS «Байкал 1»',
@@ -138,7 +137,6 @@ function closeModal() {
 // Обработчики кликов по карточкам
 document.querySelectorAll('.card, .route-card').forEach(card => {
     card.addEventListener('click', (e) => {
-        // Не открываем модалку, если клик был по кнопке внутри
         if (e.target.closest('a.btn')) return;
         const info = card.dataset.info;
         const img = card.querySelector('img');
@@ -158,14 +156,23 @@ document.addEventListener('keydown', (e) => {
 // Cookie-баннер
 const cookieBanner = document.getElementById('cookieBanner');
 const cookieAccept = document.getElementById('cookieAccept');
+const cookieClose = document.getElementById('cookieClose');
 
+// Показываем баннер, если согласие ещё не дано
 if (!localStorage.getItem('cookieAccepted')) {
-    cookieBanner.classList.remove('hidden');
+    cookieBanner?.classList.remove('hidden');
 }
 
-cookieAccept.addEventListener('click', () => {
+// Закрытие по кнопке «Согласен»
+cookieAccept?.addEventListener('click', () => {
     localStorage.setItem('cookieAccepted', 'true');
-    cookieBanner.classList.add('hidden');
+    cookieBanner?.classList.add('hidden');
+});
+
+// Закрытие по крестику
+cookieClose?.addEventListener('click', () => {
+    localStorage.setItem('cookieAccepted', 'true');
+    cookieBanner?.classList.add('hidden');
 });
 
 // Анимация появления при скролле
@@ -175,7 +182,6 @@ const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
             entry.target.classList.add('visible');
-            // Для h2, которые не имеют data-animate, мы всё равно добавим .visible
             observer.unobserve(entry.target);
         }
     });
@@ -185,9 +191,3 @@ const observer = new IntersectionObserver((entries) => {
 });
 
 animatedElements.forEach(el => observer.observe(el));
-
-// Закрытие cookie по крестику
-document.getElementById('cookieClose')?.addEventListener('click', () => {
-    document.getElementById('cookieBanner')?.classList.add('hidden');
-    localStorage.setItem('cookieAccepted', 'true');
-});
