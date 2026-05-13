@@ -185,3 +185,9 @@ const observer = new IntersectionObserver((entries) => {
 });
 
 animatedElements.forEach(el => observer.observe(el));
+
+// Закрытие cookie по крестику
+document.getElementById('cookieClose')?.addEventListener('click', () => {
+    document.getElementById('cookieBanner')?.classList.add('hidden');
+    localStorage.setItem('cookieAccepted', 'true');
+});
