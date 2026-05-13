@@ -29,7 +29,7 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height
     color: #fff;
     padding: 5rem 0;
     text-align: center;
-    overflow: hidden; 
+    overflow: hidden;
 }
 .hero .hero-bg {
     position: absolute;
@@ -43,7 +43,7 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height
     transition: transform 0.8s ease-out;
 }
 .hero:hover .hero-bg {
-    transform: scale(1); /* лёгкий параллакс при наведении */
+    transform: scale(1);
 }
 .hero-overlay {
     position: absolute;
@@ -185,7 +185,7 @@ h2.visible:after { transform: scaleX(1); }
     align-items: center;
     justify-content: center;
     gap: 0.2rem;
-    animation: none; /* убираем анимацию кнопок из героя */
+    animation: none;
 }
 .mobile-call-bar .btn i {
     margin-right: 3px;
@@ -254,39 +254,119 @@ h2.visible:after { transform: scaleX(1); }
     margin: 1rem 0;
 }
 
-/* Cookie-баннер */
+/* Улучшенный Cookie-баннер (уменьшен, выровнен, с кнопкой закрытия) */
 .cookie-banner {
-    display: none;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    background: #222;
-    color: #fff;
-    padding: 1rem 2rem;
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
     flex-wrap: wrap;
+    position: fixed;
+    bottom: 5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: auto;
+    max-width: 90%;
+    background: rgba(20, 20, 20, 0.85);
+    backdrop-filter: blur(10px);
+    color: #ccc;
+    padding: 0.7rem 1.2rem;
+    border-radius: 50px;
     z-index: 400;
+    font-size: 0.8rem;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+    border: 1px solid rgba(255,255,255,0.15);
+    line-height: 1.4;
 }
 .cookie-banner p {
     margin: 0;
-    font-size: 0.9rem;
-    max-width: 70%;
+    padding: 0;
+    max-width: 250px;
+    text-align: left;
 }
 .cookie-banner a {
-    color: #25D366;
+    color: #8bc34a;
     text-decoration: underline;
+    white-space: nowrap;
 }
 .cookie-banner .btn {
-    margin-left: 1rem;
+    margin: 0;
+    padding: 0.4rem 1rem;
+    font-size: 0.75rem;
+    background: #0077b6;
+    color: #fff;
+    border-radius: 30px;
     white-space: nowrap;
+    flex-shrink: 0;
+}
+.cookie-banner .close-cookie {
+    background: none;
+    border: none;
+    color: #999;
+    font-size: 1.4rem;
+    cursor: pointer;
+    padding: 0 0.2rem;
+    line-height: 1;
+    transition: color 0.2s;
+    flex-shrink: 0;
+}
+.cookie-banner .close-cookie:hover {
+    color: #fff;
 }
 .hidden { display: none !important; }
 
-/* Дополнительные анимации для плавного появления */
-@keyframes fadeInLeft {
-    from { opacity: 0; transform: translateX(-20px); }
-    to { opacity: 1; transform: translateX(0); }
+/* Адаптивность (мобильная версия) */
+@media (max-width: 768px) {
+    /* Основные отступы */
+    section { padding: 2.5rem 0; }
+
+    /* Герой-секция */
+    .hero { padding: 3rem 0; }
+    .hero h1 {
+        font-size: 1.8rem;
+        word-break: break-word;
+        hyphens: auto;
+        padding: 0 0.5rem;
+    }
+    .hero p { font-size: 1rem; padding: 0 1rem; }
+
+    /* Заголовки секций */
+    h2 { font-size: 1.7rem; padding: 0 1rem; }
+    h2:after { width: 40px; }
+
+    /* Карточки катеров и маршрутов */
+    .card, .route-card, .review {
+        width: 100%;
+        max-width: 320px;
+        padding: 1rem;
+    }
+    .card img, .route-card img { height: 160px; }
+    .price { font-size: 1.2rem; }
+
+    /* Таблица прайса */
+    .full-price th, .full-price td { padding: 0.6rem; font-size: 0.85rem; }
+
+    /* О нас и отзывы */
+    .about-item { padding: 1.5rem; }
+    .about-item h3 { font-size: 1.1rem; }
+
+    /* Контакты */
+    .contact-info, .contact-form { padding: 1.5rem; }
+    .map-container iframe { height: 200px; }
+
+    /* Куки-баннер на мобильных еще компактнее */
+    .cookie-banner {
+        bottom: 4.5rem;
+        max-width: 95%;
+        padding: 0.5rem 0.8rem;
+        font-size: 0.7rem;
+        border-radius: 35px;
+    }
+    .cookie-banner p { max-width: 180px; }
+    .cookie-banner .btn { padding: 0.3rem 0.8rem; font-size: 0.7rem; }
+
+    /* Модальное окно */
+    .modal-img { max-height: 250px; }
+    .modal-body { padding: 1rem; }
+    .modal-price { font-size: 1.1rem; }
 }
