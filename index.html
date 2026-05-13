@@ -312,10 +312,12 @@
 </div>
 
 <!-- Cookie-баннер -->
-<div class="cookie-banner" id="cookieBanner">
-    <p>Мы используем файлы cookie. <a href="#">Политика</a></p>
-    <button class="btn btn-primary" id="cookieAccept">OK</button>
-    <button class="close-cookie" id="cookieClose">&times;</button>
+<div class="cookie-banner hidden" id="cookieBanner">
+    <p class="cookie-text">Мы используем файлы cookie. Продолжая, вы соглашаетесь с <a href="#">политикой</a>.</p>
+    <div class="cookie-actions">
+        <button class="btn btn-primary btn-cookie" id="cookieAccept">Согласен</button>
+        <button class="close-cookie" id="cookieClose" aria-label="Закрыть">&times;</button>
+    </div>
 </div>
 
 <div class="mobile-call-bar">
