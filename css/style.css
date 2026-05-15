@@ -29,7 +29,7 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height
     color: #fff;
     padding: 5rem 0;
     text-align: center;
-    overflow: hidden;
+    overflow: hidden; 
 }
 .hero .hero-bg {
     position: absolute;
@@ -94,11 +94,33 @@ h2.visible { opacity: 1; transform: translateY(0); }
 h2:after { content: ''; display: block; width: 60px; height: 3px; background: #0077b6; margin: 0.5rem auto; border-radius: 2px; transform: scaleX(0); transition: transform 0.4s ease; }
 h2.visible:after { transform: scaleX(1); }
 .cards, .route-cards, .review-cards { display: flex; gap: 2rem; flex-wrap: wrap; justify-content: center; }
-.card, .route-card, .review { background: rgba(255,255,255,0.7); backdrop-filter: blur(8px); border-radius: 16px; padding: 1.5rem; width: 300px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.06); transition: transform 0.3s, box-shadow 0.3s; cursor: pointer; opacity: 0; transform: translateY(30px); }
+.card, .route-card, .review { background: rgba(255,255,255,0.7); backdrop-filter: blur(8px); border-radius: 16px; padding: 1.5rem; width: 300px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.06); transition: transform 0.3s, box-shadow 0.3s; cursor: pointer; position: relative; overflow: hidden; opacity: 0; transform: translateY(30px); }
 .card.visible, .route-card.visible, .review.visible { opacity: 1; transform: translateY(0); transition: opacity 0.6s ease, transform 0.6s ease; }
 .card:hover, .route-card:hover { transform: translateY(-5px); box-shadow: 0 15px 35px rgba(0,0,0,0.1); }
 .card img, .route-card img { width: 100%; height: 200px; object-fit: cover; border-radius: 12px; margin-bottom: 1rem; }
 .price { font-size: 1.4rem; font-weight: bold; color: #0077b6; margin: 1rem 0; }
+
+/* Плашки для карточек маршрутов */
+.badge {
+    position: absolute;
+    top: 12px;
+    right: -30px;
+    padding: 0.3em 2.2em;
+    font-size: 0.75rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #fff;
+    background: #e74c3c; /* красный для Хит по умолчанию */
+    transform: rotate(35deg);
+    transform-origin: center;
+    z-index: 10;
+    pointer-events: none;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    letter-spacing: 0.05em;
+}
+.badge-hit { background: #e74c3c; }
+.badge-new { background: #27ae60; }
+.badge-top { background: #f39c12; }
 
 .link {
     display: block;
@@ -254,107 +276,7 @@ h2.visible:after { transform: scaleX(1); }
     margin: 1rem 0;
 }
 
-/* Улучшенный Cookie-баннер (уменьшен, выровнен, с кнопкой закрытия) */
-.cookie-banner {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
-    flex-wrap: wrap;
-    position: fixed;
-    bottom: 5rem;
-    left: 50%;
-    transform: translateX(-50%);
-    width: auto;
-    max-width: 90%;
-    background: rgba(20, 20, 20, 0.85);
-    backdrop-filter: blur(10px);
-    color: #ccc;
-    padding: 0.7rem 1.2rem;
-    border-radius: 50px;
-    z-index: 400;
-    font-size: 0.8rem;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-    border: 1px solid rgba(255,255,255,0.15);
-    line-height: 1.4;
-}
-.cookie-banner p {
-    margin: 0;
-    padding: 0;
-    max-width: 250px;
-    text-align: left;
-}
-.cookie-banner a {
-    color: #8bc34a;
-    text-decoration: underline;
-    white-space: nowrap;
-}
-.cookie-banner .btn {
-    margin: 0;
-    padding: 0.4rem 1rem;
-    font-size: 0.75rem;
-    background: #0077b6;
-    color: #fff;
-    border-radius: 30px;
-    white-space: nowrap;
-    flex-shrink: 0;
-}
-.cookie-banner .close-cookie {
-    background: none;
-    border: none;
-    color: #999;
-    font-size: 1.4rem;
-    cursor: pointer;
-    padding: 0 0.2rem;
-    line-height: 1;
-    transition: color 0.2s;
-    flex-shrink: 0;
-}
-.cookie-banner .close-cookie:hover {
-    color: #fff;
-}
-.hidden { display: none !important; }
-
-/* Адаптивность (мобильная версия) */
-@media (max-width: 768px) {
-    /* Основные отступы */
-    section { padding: 2.5rem 0; }
-
-    /* Герой-секция */
-    .hero { padding: 3rem 0; }
-    .hero h1 {
-        font-size: 1.8rem;
-        word-break: break-word;
-        hyphens: auto;
-        padding: 0 0.5rem;
-    }
-    .hero p { font-size: 1rem; padding: 0 1rem; }
-
-    /* Заголовки секций */
-    h2 { font-size: 1.7rem; padding: 0 1rem; }
-    h2:after { width: 40px; }
-
-    /* Карточки катеров и маршрутов */
-    .card, .route-card, .review {
-        width: 100%;
-        max-width: 320px;
-        padding: 1rem;
-    }
-    .card img, .route-card img { height: 160px; }
-    .price { font-size: 1.2rem; }
-
-    /* Таблица прайса */
-    .full-price th, .full-price td { padding: 0.6rem; font-size: 0.85rem; }
-
-    /* О нас и отзывы */
-    .about-item { padding: 1.5rem; }
-    .about-item h3 { font-size: 1.1rem; }
-
-    /* Контакты */
-    .contact-info, .contact-form { padding: 1.5rem; }
-    .map-container iframe { height: 200px; }
-
-    /* Cookie-баннер */
+/* Cookie-баннер */
 .cookie-banner {
     display: flex;
     flex-direction: column;
@@ -419,12 +341,36 @@ h2.visible:after { transform: scaleX(1); }
 }
 .hidden { display: none !important; }
 
+/* Адаптивность (мобильная версия) */
 @media (max-width: 768px) {
+    section { padding: 2.5rem 0; }
+    .hero { padding: 3rem 0; }
+    .hero h1 {
+        font-size: 1.8rem;
+        word-break: break-word;
+        hyphens: auto;
+        padding: 0 0.5rem;
+    }
+    .hero p { font-size: 1rem; padding: 0 1rem; }
+    h2 { font-size: 1.7rem; padding: 0 1rem; }
+    h2:after { width: 40px; }
+    .card, .route-card, .review {
+        width: 100%;
+        max-width: 320px;
+        padding: 1rem;
+    }
+    .card img, .route-card img { height: 160px; }
+    .price { font-size: 1.2rem; }
+    .full-price th, .full-price td { padding: 0.6rem; font-size: 0.85rem; }
+    .about-item { padding: 1.5rem; }
+    .about-item h3 { font-size: 1.1rem; }
+    .contact-info, .contact-form { padding: 1.5rem; }
+    .map-container iframe { height: 200px; }
     .cookie-banner {
         bottom: 4.5rem;
         max-width: 95%;
         padding: 0.5rem 0.8rem;
-        gap: 0.4rem;
+        font-size: 0.7rem;
         border-radius: 14px;
     }
     .cookie-text {
@@ -437,9 +383,6 @@ h2.visible:after { transform: scaleX(1); }
     .close-cookie {
         font-size: 1.2rem;
     }
-}
-
-    /* Модальное окно */
     .modal-img { max-height: 250px; }
     .modal-body { padding: 1rem; }
     .modal-price { font-size: 1.1rem; }
