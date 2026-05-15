@@ -103,20 +103,21 @@ h2.visible:after { transform: scaleX(1); }
 /* Плашки для карточек маршрутов */
 .badge {
     position: absolute;
-    top: 12px;
-    right: -30px;
-    padding: 0.3em 2.2em;
-    font-size: 0.75rem;
+    top: 10px;
+    right: -18px;
+    padding: 0.25em 1em;
+    font-size: 0.7rem;
     font-weight: bold;
     text-transform: uppercase;
     color: #fff;
-    background: #e74c3c; /* красный для Хит по умолчанию */
+    background: #e74c3c;
     transform: rotate(35deg);
     transform-origin: center;
     z-index: 10;
     pointer-events: none;
     box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-    letter-spacing: 0.05em;
+    letter-spacing: 0.04em;
+    line-height: 1.2;
 }
 .badge-hit { background: #e74c3c; }
 .badge-new { background: #27ae60; }
