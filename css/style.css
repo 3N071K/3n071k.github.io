@@ -104,8 +104,8 @@ h2.visible:after { transform: scaleX(1); }
 .badge {
     position: absolute;
     top: 10px;
-    right: -18px;
-    padding: 0.25em 1em;
+    right: -5px;
+    padding: 0.35em 1em;
     font-size: 0.7rem;
     font-weight: bold;
     text-transform: uppercase;
@@ -120,7 +120,8 @@ h2.visible:after { transform: scaleX(1); }
     line-height: 1.2;
 }
 .badge-hit { background: #e74c3c; }
-.badge-new { background: #27ae60; }
+.badge-new { 
+    background: #27ae60; right: -18px;}
 .badge-top { background: #f39c12; }
 
 .link {
